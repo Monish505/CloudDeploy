@@ -1,0 +1,284 @@
+
+/* CloudDeploy - Dashboard Styling */
+
+:root {
+    --bg: #0b1120;
+    --panel: #141e30;
+    --panel-light: #1b2940;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --blue: #60a5fa;
+    --green: #34d399;
+    --border: #29364b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 245px;
+    padding: 30px 20px;
+    background: #0e1728;
+    border-right: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 45px;
+}
+
+.nav-label {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin: 25px 10px 12px;
+}
+
+.nav-item {
+    display: block;
+    padding: 13px 14px;
+    margin-bottom: 8px;
+    border-radius: 9px;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.nav-item.active,
+.nav-item:hover {
+    background: var(--panel-light);
+    color: var(--blue);
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.topbar h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.badge {
+    padding: 9px 14px;
+    border-radius: 30px;
+    color: var(--green);
+    background: #10352f;
+    border: 1px solid #1d5b4d;
+    font-size: 13px;
+}
+
+.welcome {
+    padding: 30px;
+    margin-bottom: 28px;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #183b69, #1b2940 75%);
+    border: 1px solid #2b4b71;
+}
+
+.welcome h2 {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.welcome p {
+    color: #c5d5e8;
+    line-height: 1.7;
+}
+
+.section-title {
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.card {
+    padding: 23px;
+    border-radius: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+}
+
+.card-label {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.card-value {
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.card-note {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.green {
+    color: var(--green);
+}
+
+.blue {
+    color: var(--blue);
+}
+
+.activity {
+    padding: 24px;
+    border-radius: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+}
+
+.activity-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.activity-row:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    background: var(--panel-light);
+    border-radius: 10px;
+}
+
+.activity-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-text strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.activity-text small {
+    color: var(--muted);
+}
+
+button {
+    background: var(--blue);
+    color: #07111f;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #93c5fd;
+}
+
+#status {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 14px;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 190px;
+    }
+
+    .main {
+        padding: 24px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 18px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+        margin-bottom: 18px;
+    }
+
+    .nav-label {
+        display: none;
+    }
+
+    .nav-item {
+        display: inline-block;
+        margin: 5px 3px;
+    }
+
+    .main {
+        padding: 20px 15px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome {
+        padding: 22px;
+    }
+}

@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudDeploy | Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">☁ CloudDeploy</div>
+
+            <p class="nav-label">WORKSPACE</p>
+            <a href="/" class="nav-item active">▦ Dashboard</a>
+            <a href="#services" class="nav-item">◇ Services</a>
+            <a href="#activity" class="nav-item">◷ Activity</a>
+
+            <p class="nav-label">PROJECT</p>
+            <a href="#deployment" class="nav-item">⇧ Deployment</a>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="subtitle">Monitor your CloudDeploy application</p>
+                </div>
+                <span class="badge">● Local Environment</span>
+            </header>
+
+            <section class="welcome">
+                <h2>Welcome to CloudDeploy 🚀</h2>
+                <p>Your cloud deployment workspace is ready.
+                   Monitor your API and prepare your application for AWS.</p>
+            </section>
+
+            <h2 class="section-title" id="services">Service Overview</h2>
+
+            <section class="cards">
+                <article class="card">
+                    <p class="card-label">APPLICATION</p>
+                    <h3 class="card-value">CloudDeploy</h3>
+                    <p class="card-note">Flask web application</p>
+                </article>
+
+                <article class="card">
+                    <p class="card-label">BACKEND API</p>
+                    <h3 class="card-value green" id="api-card-status">Checking...</h3>
+                    <p class="card-note">API health check</p>
+                </article>
+
+                <article class="card">
+                    <p class="card-label">CONTAINER PLATFORM</p>
+                    <h3 class="card-value blue">Docker</h3>
+                    <p class="card-note">Containerized application</p>
+                </article>
+            </section>
+
+            <h2 class="section-title" id="deployment">API Health Check</h2>
+
+            <section class="activity">
+                <p class="subtitle">Send a request to your Flask backend.</p>
+                <br>
+                <button id="check-button" onclick="checkStatus()">
+                    Check API Status
+                </button>
+                <p id="status" role="status">Waiting for health check...</p>
+            </section>
+
+            <br>
+
+            <h2 class="section-title" id="activity">Recent Activity</h2>
+
+            <section class="activity">
+                <div class="activity-row">
+                    <div class="activity-icon">✓</div>
+                    <div class="activity-text">
+                        <strong>Flask application created</strong>
+                        <small>Backend API configured</small>
+                    </div>
+                    <span class="green">Ready</span>
+                </div>
+
+                <div class="activity-row">
+                    <div class="activity-icon">▣</div>
+                    <div class="activity-text">
+                        <strong>Docker image prepared</strong>
+                        <small>clouddeploy:v1</small>
+                    </div>
+                    <span class="green">Built</span>
+                </div>
+
+                <div class="activity-row">
+                    <div class="activity-icon">☁</div>
+                    <div class="activity-text">
+                        <strong>AWS deployment</strong>
+                        <small>Not deployed yet</small>
+                    </div>
+                    <span class="blue">Planned</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        async function checkStatus() {
+            const status = document.getElementById("status");
+            const apiCard = document.getElementById("api-card-status");
+            const button = document.getElementById("check-button");
+
+            status.textContent = "Checking backend...";
+            button.disabled = true;
+
+            try {
+                const response = await fetch("/api/status");
+
+                if (!response.ok) {
+                    throw new Error("API returned an error");
+                }
+
+                const data = await response.json();
+
+                status.textContent = data.message + " — " + data.status;
+                apiCard.textContent = "Online";
+                apiCard.className = "card-value green";
+            } catch (error) {
+                status.textContent = "Backend check failed. Please try again.";
+                apiCard.textContent = "Offline";
+                apiCard.className = "card-value";
+            } finally {
+                button.disabled = false;
+            }
+        }
+
+        checkStatus();
+    </script>
+</body>
+</html>
